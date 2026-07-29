@@ -1,13 +1,9 @@
 FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    zip \
-    libzip-dev \
+    git unzip zip libzip-dev \
     && docker-php-ext-install mysqli pdo pdo_mysql
 
-# Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 RUN a2enmod rewrite
@@ -16,8 +12,9 @@ COPY . /var/www/html/
 
 WORKDIR /var/www/html
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Clear cache and reinstall dependencies
+RUN rm -rf vendor composer.lock
+RUN composer install
 
 RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
 
