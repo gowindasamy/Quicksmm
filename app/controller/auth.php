@@ -281,5 +281,7 @@ $_SESSION["currency_hash"] = $currency_hash;
     
 } 
 }
- file_put_contents($ver, $ser );
+if (!empty($ver)) {
+    file_put_contents($ver, $ser);
+}
      
