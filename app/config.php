@@ -7,7 +7,8 @@ define('STYLESHEETS_URL', '//quicksmm.onrender.com');
 
 date_default_timezone_set('Asia/Kolkata');
 
-error_reporting(0);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);;
 
 return [
   'db' => [
