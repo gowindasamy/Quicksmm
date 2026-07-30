@@ -178,6 +178,22 @@ if ($settings["service_list"] == 2):
 endif;
 
 require controller($route[0]);
+$templateDir = $templateDir ?? "";
+$earnList = $earnList ?? [];
+$ordersList = $ordersList ?? [];
+$paginationArr = $paginationArr ?? [];
+$currency = $currency ?? [];
+$error = $error ?? false;
+$errorText = $errorText ?? "";
+$success = $success ?? false;
+$successText = $successText ?? "";
+$title = $title ?? "";
+$categories = $categories ?? [];
+$ticketList = $ticketList ?? [];
+$messageList = $messageList ?? [];
+$methodList = $methodList ?? [];
+$methoList = $methoList ?? [];
+$panel_logs = $panel_logs ?? [];
 if ($settings["snow_effect"] == 1) {
   $snow_effect = true;
 }
