@@ -12,10 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['step']) && $_POST['st
     $db_user = filter_var($_POST['db_user'], FILTER_SANITIZE_STRING);
     $db_pass = $_POST['db_pass']; // Consider password security measures
     $db_name = filter_var($_POST['db_name'], FILTER_SANITIZE_STRING);
+    $db_port = (int)($_POST['db_port'] ?? 3306);
     $domain = filter_var($_POST['domain'], FILTER_SANITIZE_URL);
 
     // Create database connection (improve error handling)
-    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name, $db_port);
     if ($conn->connect_error) {
         die('Connection failed: ' . $conn->connect_error);
     }
@@ -50,6 +51,7 @@ return [
     'host'    => '$db_host',
     'user'    => '$db_user',
     'pass'    => '$db_pass',
+    'port'    => '$db_port',
     'charset' => 'utf8mb4'
   ]
 ];
@@ -164,6 +166,10 @@ function sendInstallationEmail($domain) {
             <div class="form-group">
                 <label for="db_pass">Database Password:</label>
                 <input type="password" name="db_pass" id="db_pass" required><br>
+            </div>
+            <div class="form-group">
+    <label for="db_port">Database Port:</label>
+    <input type="text" name="db_port" id="db_port" value="3306" required><br>
             </div>
             <div class="form-group">
                 <label for="db_name">Database Name:</label>
