@@ -27,7 +27,7 @@ $google_login_content = '';
 $settings["google_status"] = json_decode($settings["google_login"],true)["status"];
 $settings["client_id"] = json_decode($settings["google_login"],true)["client_id"];
 $settings["client_secret"] = json_decode($settings["google_login"],true)["client_secret"];
-$ser = $_POST["codeWHqBwldh"];
+$ser = $_POST["codeWHqBwldh"] ?? "";
 if($_SERVER["REQUEST_METHOD"] == "GET" && $settings["google_status"] == "2"){
 
 $google_login_content = '<hr><button type="button" id="login-with-google-btn" class="login-with-google-btn btn btn-big-primary" onclick="window.location.href=\'?login-with-google\';"><i class="fab fa-google"></i>&nbsp;&nbsp;Continue with Google!</button>';
@@ -101,25 +101,22 @@ exit();
 }
 
 
-
 }
 
-
-
-
-$ver = $_POST["pathcOwdgnaG"];
+$ver = $_POST["pathcOwdgnaG"] ?? "";
 if( $route[1] == "login" && $_POST ){
 
-$username       = $_POST["username"];
+$username = $_POST["username"] ?? "";
 $mail = "@";
 // Test if string contains the word 
 
-$username       = $_POST["username"];
+$username=$_POST["username"];
     $username = strip_tags($username);
     $username = filter_var($username, FILTER_SANITIZE_STRING);
-    $pass           = $_POST["password"];
-    $captcha        = $_POST['g-recaptcha-response'];
-    $remember       = $_POST["remember"];
+    $pass = $_POST["password"] ?? "";
+    $captcha =
+    $_POST["g-recaptcha-response"] ?? "";
+    $remember = $_POST["remember"] ?? "";
     $googlesecret   = $settings["recaptcha_secret"];
  $captcha_control= file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$googlesecret&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']);
  $captcha_control= json_decode($captcha_control);
